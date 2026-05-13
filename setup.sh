@@ -51,7 +51,11 @@ if [[ "${BASH_FRMWRK_VER}" -lt "${BASH_FRMWRK_MINVER}" ]]; then
 fi
 
 # +----- Variables ------------------------------------------------------------+
-PREFIX="/usr/local"
+if [[ "$(id -u)" -eq 0 ]]; then
+    PREFIX="/usr/local"
+else
+    PREFIX="${HOME}/.local"
+fi
 CONFDIR="${PREFIX}/etc"
 BASEDIR="${PREFIX}/share/motd.sh"
 MODULES="${PREFIX}/share/motd.sh/modules"
@@ -88,6 +92,10 @@ chmod 755 ${PREFIX}/bin/motd.sh >> /dev/null 2>&1
 
 __echo_Left "Installing configuration file to ${CONFDIR}"
 cp -rf motd.sh.conf ${CONFDIR} >> /dev/null 2>&1
+__echo_Result
+
+__echo_Left "Installing configuration file to ${BASEDIR}"
+cp -rf motd.sh.conf ${BASEDIR} >> /dev/null 2>&1
 __echo_Result
 
 __echo_Left "Installing base files to ${BASEDIR}"
