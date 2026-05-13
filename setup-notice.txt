@@ -1,0 +1,14 @@
++------------------------------------------------------------------------------+
+|              _      _      _                                                 |
+|    _ __  ___| |_ __| |  __| |_                                               |
+|   | '  \/ _ \  _/ _` |_(_-< ' \                                              |
+|   |_|_|_\___/\__\__,_(_)__/_||_|                                             |
+|                                                                              |
+|   This setup script will put motd.sh into it's default location. Don't       |
+|   worry, you'll be fine. The default location is /usr/local.                 |
+|   If you don't like that you may run motd.sh right out of this directory or  |
+|   tinker around and place it where you like it                               |
+|                                                                              |
+|   Copyright © 2019 Waldemar Schroeer                                         |
+|                    waldemar.schroeer(at)rz-amper.de                          |
++------------------------------------------------------------------------------+
