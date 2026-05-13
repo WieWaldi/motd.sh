@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# +----------------------------------------------------------------------------+
+# | ./motd.sh/modules/40-tmux                                                  |
+# +----------------------------------------------------------------------------+
+# |       Usage: ---                                                           |
+# | Description: MOTD module to print tmux session information                 |
+# |    Requires: MOTD                                                          |
+# |       Notes: ---                                                           |
+# |      Author: Waldemar Schroeer                                             |
+# |     Company: Rechenzentrum Amper                                           |
+# |     Version: 1.1                                                           |
+# |     Created: 2021-03-29                                                    |
+# |    Revision: 2026-04-21                                                    |
+# |                                                                            |
+# | Copyright © 2022 Waldemar Schroeer                                         |
+# |                  waldemar.schroeer(at)rz-amper.de                          |
+# +----------------------------------------------------------------------------+
+
+set -euo pipefail
+source "$BASE_DIR/framework.sh"
+
+# Check if module is enabled
+[[ -z "${MOD_TMUX_RUN+x}" ]] && exit 0
+[[ ! "$MOD_TMUX_RUN" = "true" ]] && exit 0
+
+type tmux >/dev/null 2>&1 || exit 1
+
+set +e; sessions="$(tmux ls 2>&1)"; tmux_exit="$?"; set -e
+
+out=""
+if [ $tmux_exit -ne 0 ]; then
+    out+="no sessions\n"
+else
+    while IFS= read -r line; do
+        name="$(cut -d ':' -f 1 <<< $line)"
+        windows="$(cut -d ' ' -f 2,3 <<< $line)"
+        date="$(cut -d ' ' -f 5,6,7,8 <<< $line)"
+        out+="$(print_split $WIDTH "$name ($windows)" "$date")\n"
+    done <<< $sessions
+fi
+
+print_columns "Tmux sessions" "${out::-2}"
+# +----- End ------------------------------------------------------------------+

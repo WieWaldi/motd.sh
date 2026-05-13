@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#
+# +----------------------------------------------------------------------------+
+# | ./motd.sh/modules/34-docker                                                |
+# +----------------------------------------------------------------------------+
+# |       Usage: ---                                                           |
+# | Description: MOTD module to print docker informations                      |
+# |    Requires: MOTD                                                          |
+# |       Notes: ---                                                           |
+# |      Author: Waldemar Schroeer                                             |
+# |     Company: Rechenzentrum Amper                                           |
+# |     Version: 1.1                                                           |
+# |     Created: 2021-03-29                                                    |
+# |    Revision: 2026-04-21                                                    |
+# |                                                                            |
+# | Copyright © 2022 Waldemar Schroeer                                         |
+# |                  waldemar.schroeer(at)rz-amper.de                          |
+# +----------------------------------------------------------------------------+
+
+set -euo pipefail
+source "${BASE_DIR}/framework.sh"
+
+# Check if module is enabled
+[[ -z "${MOD_DOCKER_RUN+x}" ]] && exit 0
+[[ ! "$MOD_DOCKER_RUN" = "true" ]] && exit 0
+
+containers="$(docker ps -a --format "{{ .Names }}\t{{ .Status }}\t{{ .State }}")"
+
+text=""
+if [ -z "$containers"]; then
+    text+="no containers\n"
+else
+    while IFS= read -r line; do
+        IFS=$'\t' read -r name description state <<< "$line"
+        case $state in
+            running) color="${CO}";;
+            paused | restarting) color="${CW}";;
+            exited | dead) color="${CE}";;
+            *) color="${CN}";;
+        esac;
+        text+="$(print_split $WIDTH "$name" "${color}${description,,}${CN}")\n"
+    done <<< $containers
+fi
+
+print_columns "Docker" "${text::-2}"
+# +----- End ------------------------------------------------------------------+
