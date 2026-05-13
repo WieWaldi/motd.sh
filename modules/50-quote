@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# +----------------------------------------------------------------------------+
+# | ./motd.sh/modules/50-quote                                                 |
+# +----------------------------------------------------------------------------+
+# |       Usage: ---                                                           |
+# | Description: MOTD module to print fortune quotes                           |
+# |    Requires: MOTD                                                          |
+# |       Notes: ---                                                           |
+# |      Author: Waldemar Schroeer                                             |
+# |     Company: Rechenzentrum Amper                                           |
+# |     Version: 1.1                                                           |
+# |     Created: 2021-03-29                                                    |
+# |    Revision: 2026-04-21                                                    |
+# |                                                                            |
+# | Copyright © 2022 Waldemar Schroeer                                         |
+# |                  waldemar.schroeer(at)rz-amper.de                          |
+# +----------------------------------------------------------------------------+
+
+set -euo pipefail
+source "$BASE_DIR/framework.sh"
+
+# Check if module is enabled
+[[ -z "${MOD_QUOTE_RUN+x}" ]] && exit 0
+[[ ! "$MOD_QUOTE_RUN" = "true" ]] && exit 0
+
+out="$(fortune -s all | fold -sw $WIDTH)"
+
+print_columns "Quote" "$out"
+# +----- End ------------------------------------------------------------------+

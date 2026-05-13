@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# +----------------------------------------------------------------------------+
+# | ./motd.sh/modules/00-atest                                                 |
+# +----------------------------------------------------------------------------+
+# |       Usage: ---                                                           |
+# | Description: MOTD module to tiker with                                     |
+# |    Requires: MOTD                                                          |
+# |       Notes: ---                                                           |
+# |      Author: Waldemar Schroeer                                             |
+# |     Company: Rechenzentrum Amper                                           |
+# |     Version: 1.1                                                           |
+# |     Created: 2021-03-29                                                    |
+# |    Revision: 2026-04-21                                                    |
+# |                                                                            |
+# | Copyright © 2022 Waldemar Schroeer                                         |
+# |                  waldemar.schroeer(at)rz-amper.de                          |
+# +----------------------------------------------------------------------------+
+
+# +----- ATEST: Template and Test Script --------------------------------------+
+# The sole purpose of this module is to have one for tinkering around.
+# This module is disabled by default through config.sh.
+
+set -euo pipefail
+source "$BASE_DIR/framework.sh"
+
+# Check if module is enabled
+[[ -z "${MOD_ATEST_RUN+x}" ]] && exit 0
+[[ ! "$MOD_ATEST_RUN" = "true" ]] && exit 0
+
+# Are we all set?
+PRETTY_NAME="${PRETTY_NAME:="Unkown"}"
+
+# Function to fabricate some output.
+atest () {
+    printf "OS:     $os\n"
+    printf "Kernel: $kernel\n"
+    printf "Arch:   $arch\n"
+    printf "Distr:  $PRETTY_NAME\n"
+}
+
+# Call function atest and put output into variable.
+out="$(atest)"
+
+# Call function "print_columns" from framewark.sh.
+print_columns "ATEST" "$out"
+# +----- End ------------------------------------------------------------------+
