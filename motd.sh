@@ -22,9 +22,9 @@ PREFIX="/usr/local"                                                             
 export PREFIX
 CONFDIR="${PREFIX}/etc"
 export CONFDIR
-BASEDIR="${PREFIX}/share/motd.sh
+BASEDIR="${PREFIX}/share/motd.sh"
 export BASEDIR
-MODULES="${BASEDIR}/modules
+MODULES="${BASEDIR}/modules"
 export MODULES
 LANG="en_US.UTF-8"                                                              # Set the locale to UTF-8
 export LANG
@@ -57,6 +57,10 @@ if [ ! -f "${CONFIG_PATH}" ]; then                                              
 fi
 
 if [ -z ${MOTD_FRAMEWORK+x} ]; then                                             # Find motd.sh.framewor in the same way as the config file.
+    echo "${PREFIX}"
+    echo "${BASEDIR}"
+    echo "${CONFDIR}"
+    echo "${MODULES}"
     MOTD_FRAMEWORK=""
     for path in \
         "${HOME}/.local/share/motd.sh/motd.sh.framework" \
