@@ -20,22 +20,23 @@ Then run `motd.sh`:
 ./motd.sh/motd.sh
 ```
 
-This runs all the scripts in `modules` directory in order, `run-parts` style, and formats the output.
-
-If any modules are missing in your output, plese see [requirements](#requirements).
-
-You can also pass the config file path as the script argument (see [configuration](#configuration)):
+This runs all the scripts in `modules` directory in order, `run-parts` style,
+and formats the output. If any modules are missing in your output, plese see 
+[requirements](#requirements). You can also pass the config file path as the
+script argument (see [configuration](#configuration)):
 ```shell
 ./motd.sh/motd.sh ./path/to/config.sh
 ```
 
 ### Running at login
-One way to run it at each login is to add a line to `~/.profile` file (assuming you cloned `motd.sh` into your home directory):
+One way to run it at each login is to add a line to `~/.profile` file (assuming
+you cloned `motd.sh` into your home directory):
 ```shell
 ~/motd.sh/motd.sh
 ```
 
-If you don't want to run it in all subshells you could do something like this instead:
+If you don't want to run it in all subshells you could do something like this
+instead:
 ```shell
 if [ -z "$MOTD" ]; then
     ~/motd.sh/motd.sh
@@ -43,7 +44,8 @@ if [ -z "$MOTD" ]; then
 fi
 ```
 
-If you use `tmux` and don't want to see the motd.sh everytime you open a new shell in `tmux`, add this to your `.tmux.conf`:
+If you use `tmux` and don't want to see the motd.sh everytime you open a new
+shell in `tmux`, add this to your `.tmux.conf`:
 ```
 set-option -ga update-environment ' MOTD'
 ```
@@ -56,9 +58,10 @@ In order to run all the available modules the following programs are required:
 * [`bc`][4] - for the uptime module
 * [`fortune`][5] - for the quote module
 
-This list excludes the obvious ones, like [`tmux`](https://github.com/tmux/tmux) for `tmux` module.
-
-If any program requried by the given module is missing (or any other error occurs), it will fail silently, i.e. the module just won't be shown at all.
+This list excludes the obvious ones, like [`tmux`](https://github.com/tmux/tmux)
+for `tmux` module. If any program requried by the given module is missing 
+(or any other error occurs), it will fail silently, i.e. the module just won't
+be shown at all.
 
 
 ### Configuration
@@ -73,31 +76,31 @@ cp config.sh.example config.sh
 ```
 
 ## Hacking
-To add a new module you can create a new script in `modules` directory.
-For the output to be properly formatted it has to use `print_columns` function from `framework.sh`, please refer to the existing modules.
+To add a new module you can create a new script in `modules` directory. For the 
+output to be properly formatted it has to use `print_columns` function from
+`framework.sh`, please refer to the existing modules.
 
 Module files have to start with a two digit number followed by a hyphen. You may disable modules by simply rename the module file.
 
 ## ToDo
-- [X] Add CONTRIBUTING.md file with contribution guidelines.
-- [ ] Give option to disable colors (e.g. for better readability in `tmux`).
-- [ ] Colorless output with `motd.sh | sed -r "s:\x1B\[[0-9;]*[mK]::g"`
-- [ ] Add more modules (e.g. weather, news, etc.)
+- [X] Add CONTRIBUTING.md file with contribution guidelines.  
+- [ ] Give option to disable colors (e.g. for better readability in `tmux`).  
+- [ ] Colorless output with `motd.sh | sed -r "s:\x1B\[[0-9;]*[mK]::g"`  
+- [ ] Add more modules (e.g. weather, news, etc.)  
 
 ## License
-Source code is licensed under the MIT License. See [LICENSE][1] for more details.
+Source code is licensed under the MIT License. See [LICENSE][1] for more details.  
 
 ## Credits
-MOTD is hugely inspired by these repos
-   
+MOTD is hugely inspired by these repos  
    [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin.  
    [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran.  
-   [dynamic_motd](https://github.com/sstallion/dynamic_motd) - Dynamic MOTD for FreeBSD by Steve Stallion.
+   [dynamic_motd](https://github.com/sstallion/dynamic_motd) - Dynamic MOTD for FreeBSD by Steve Stallion.  
 
 ## Links
-Some sites and projects related to FreeBSD's motd:
+Some sites and projects related to FreeBSD's motd:  
    [BSD Magazine](https://bsdmag.org/) - BSD related news, articles and tutorials.  
-   [freebsd-dynamic-motd](https://github.com/rooty0/freebsd-dynamic-motd/blob/master/motd.sh) - Another dynamic MOTD script for FreeBSD.
+   [freebsd-dynamic-motd](https://github.com/rooty0/freebsd-dynamic-motd/blob/master/motd.sh) - Another dynamic MOTD script for FreeBSD.  
 
 [1]: https://github.com/WieWaldi/motd.sh/blob/master/LICENSE
 [2]: http://www.figlet.org/

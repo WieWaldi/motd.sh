@@ -18,7 +18,7 @@ development:
 Once you are finished, be sure to test changes locally and verify installation
 by issuing:
 
-    # setenv DESTDIR `mktemp -d`
+    # export DESTDIR=`mktemp -d`
     # make install
 
 Finally, commit your changes and create a [pull request][3] against the `master`
