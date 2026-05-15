@@ -18,7 +18,8 @@
 # +----------------------------------------------------------------------------+
 
 # +----- Variables ------------------------------------------------------------+
-PREFIX="/usr/local"                                                             # Set the prefix for config and modules
+# PREFIX="/usr/local"                                                             # Set the prefix for config and modules
+PREFIX="@@PREFIX@@"                                                             # Set the prefix for config and modules
 export PREFIX
 CONFDIR="${PREFIX}/etc"
 export CONFDIR
