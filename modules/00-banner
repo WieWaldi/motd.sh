@@ -18,7 +18,7 @@
 # +----------------------------------------------------------------------------+
 
 set -euo pipefail
-source "$BASE_DIR/framework.sh"
+source "${BASEDIR}/motd.sh.framework"
 
 # Check if module is enabled
 [[ -z "{$MOD_BANNER_RUN+x}" ]] && exit 0

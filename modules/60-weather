@@ -18,7 +18,7 @@
 # +----------------------------------------------------------------------------+
 
 set -euo pipefail
-source "$BASE_DIR/framework.sh"
+source "${BASEDIR}/motd.sh.framework"
 
 # Check if module is enabled
 [[ ! "$MOD_WEATHER_RUN" = "true" ]] && exit 0

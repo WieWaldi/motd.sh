@@ -22,7 +22,7 @@
 # This module is disabled by default through config.sh.
 
 set -euo pipefail
-source "$BASE_DIR/framework.sh"
+source "${BASEDIR}/motd.sh.framework"
 
 # Check if module is enabled
 [[ -z "${MOD_ATEST_RUN+x}" ]] && exit 0
