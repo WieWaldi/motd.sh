@@ -1,5 +1,7 @@
 # Just ignore it
 
 # General
+etc/rc.d/motd.sh
+libexec/motd.sh
 config.sh
 modules/xx-*
