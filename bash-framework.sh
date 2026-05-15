@@ -6,7 +6,8 @@
 # |       Usage: Has to be included/sourced from other scripts                 |
 # | Description: Bash Framework to simplify scripting                          |
 # |    Requires: GNU core utils                                                |
-# |       Notes: ---                                                           |
+# |       Notes: Why is this included and what's it purpose? This framework    |
+# |              script is needed by the setup.sh script.                      |
 # |      Author: Waldemar Schroeer                                             |
 # |     Company: Rechenzentrum Amper                                           |
 # |     Version: 3                                                             |
