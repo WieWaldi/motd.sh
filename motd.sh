@@ -103,10 +103,9 @@ esac
 output=""                                                                       # Run the modules and collect output
 module_list=$(                                                                  # Get the list of modules to run. Modules must be placed in ./modules/
     find "${MODULES}" -maxdepth 1 -type f \
-        -regextype posix-extended \
-        -regex '.*/[0-9]{2}-.*' \
-        -printf '%f\n' \
-        | sort -V
+        ${grep} -E '.*/[0-9]{2}-.*' \
+        ${sed} 's|.*/||' \
+        ${sort} -V
 )
 while read -r module; do
     if ! module_output=$("${MODULES}/${module}" 2> /dev/null); then continue; fi
