@@ -51,10 +51,10 @@ set-option -ga update-environment ' MOTD'
 ### Requirements
 In order to run all the available modules the following programs are required:
 
-* [`figlet`](http://www.figlet.org/)
-* [`curl`](https://curl.se/)
-* [`bc`](https://www.gnu.org/software/bc/)
-* [`fortune`](https://software.clapper.org/fortune/)
+* [`figlet`][2] - for the banner module
+* [`curl`][3] - for the public IP module
+* [`bc`][4] - for the uptime module
+* [`fortune`][5] - for the quote module
 
 This list excludes the obvious ones, like [`tmux`](https://github.com/tmux/tmux) for `tmux` module.
 
@@ -78,8 +78,29 @@ For the output to be properly formatted it has to use `print_columns` function f
 
 Module files have to start with a two digit number followed by a hyphen. You may disable modules by simply rename the module file.
 
+## ToDo
+- [X] Add CONTRIBUTING.md file with contribution guidelines.
+- [ ] Give option to disable colors (e.g. for better readability in `tmux`).
+- [ ] Colorless output with `motd.sh | sed -r "s:\x1B\[[0-9;]*[mK]::g"`
+- [ ] Add more modules (e.g. weather, news, etc.)
+
+## License
+Source code is licensed under the MIT License. See [LICENSE][1] for more details.
+
 ## Credits
 MOTD is hugely inspired by these repos
    
    [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin.  
    [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran.  
+   [dynamic_motd](https://github.com/sstallion/dynamic_motd) - Dynamic MOTD for FreeBSD by Steve Stallion.
+
+## Links
+Some sites and projects related to FreeBSD's motd:
+   [BSD Magazine](https://bsdmag.org/) - BSD related news, articles and tutorials.  
+   [freebsd-dynamic-motd](https://github.com/rooty0/freebsd-dynamic-motd/blob/master/motd.sh) - Another dynamic MOTD script for FreeBSD.
+
+[1]: https://github.com/WieWaldi/motd.sh/blob/master/LICENSE
+[2]: http://www.figlet.org/
+[3]: https://curl.se/
+[4]: https://www.gnu.org/software/bc/
+[5]: https://software.clapper.org/fortune/
