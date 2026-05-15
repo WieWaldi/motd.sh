@@ -56,11 +56,7 @@ if [ ! -f "${CONFIG_PATH}" ]; then                                              
     exit 1
 fi
 
-if [ -z ${MOTD_FRAMEWORK+x} ]; then                                             # Find motd.sh.framewor in the same way as the config file.
-    echo "${PREFIX}"
-    echo "${BASEDIR}"
-    echo "${CONFDIR}"
-    echo "${MODULES}"
+if [ -z ${MOTD_FRAMEWORK+x} ]; then                                             # Find motd.sh.framework in the same way as the config file.
     MOTD_FRAMEWORK=""
     for path in \
         "${HOME}/.local/share/motd.sh/motd.sh.framework" \
@@ -106,13 +102,6 @@ case ${os} in                                                                   
     ;;
 esac
 
-echo "PREFIX:               ${PREFIX}"
-echo "BASEDIR:              ${BASEDIR}"
-echo "CONFDIR:              ${CONFDIR}"
-echo "MODULES:              ${MODULES}"
-echo "CONFIG_PATH:          ${CONFIG_PATH}"
-echo "MOTD_FRAMEWORK:       ${MOTD_FRAMEWORK}"
-echo "module_list:          ${module_list}"
 
 output=""                                                                       # Run the modules and collect output
 module_list=$(                                                                  # Get the list of modules to run. Modules must be placed in ./modules/
@@ -121,6 +110,15 @@ module_list=$(                                                                  
         | ${sed} 's|.*/||' \
         | ${sort} -V
 )
+
+# echo "PREFIX:               ${PREFIX}"                                        # Just for debugging purposes, print the variables we have set so far. You can remove this in production.
+# echo "BASEDIR:              ${BASEDIR}"
+# echo "CONFDIR:              ${CONFDIR}"
+# echo "MODULES:              ${MODULES}"
+# echo "CONFIG_PATH:          ${CONFIG_PATH}"
+# echo "MOTD_FRAMEWORK:       ${MOTD_FRAMEWORK}"
+# echo "module_list:          ${module_list}"
+
 while read -r module; do
     if ! module_output=$("${MODULES}/${module}" 2> /dev/null); then continue; fi
     output+="${module_output}"
