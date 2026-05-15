@@ -83,20 +83,26 @@ get_os                                                                          
 case ${os} in                                                                   # Get our goods together
     Linux*)
     export awk="awk"
-    export sed="sed"
     export bc="bc"
+    export grep="/usr/bin/grep"
+    export sed="sed"
+    export sort="/usr/bin/sort"
     ;;
 
     FreeBSD)
     export awk="awk"
-    export sed="sed"
     export bc="bc"
+    export grep="/usr/bin/grep"
+    export sed="sed"
+    export sort="/usr/bin/sort"
     ;;
 
     SunOS)
     export awk="gawk"
-    export sed="gsed"
     export bc="gbc"
+    export grep="/usr/bin/grep"
+    export sed="gsed"
+    export sort="/usr/bin/sort"
     ;;
 esac
 
