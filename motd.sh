@@ -106,6 +106,14 @@ case ${os} in                                                                   
     ;;
 esac
 
+echo "PREFIX:               ${PREFIX}"
+echo "BASEDIR:              ${BASEDIR}"
+echo "CONFDIR:              ${CONFDIR}"
+echo "MODULES:              ${MODULES}"
+echo "CONFIG_PATH:          ${CONFIG_PATH}"
+echo "MOTD_FRAMEWORK:       ${MOTD_FRAMEWORK}"
+echo "module_list:          ${module_list}"
+
 output=""                                                                       # Run the modules and collect output
 module_list=$(                                                                  # Get the list of modules to run. Modules must be placed in ./modules/
     find "${MODULES}" -maxdepth 1 -type f \
