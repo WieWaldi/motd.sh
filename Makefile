@@ -76,10 +76,10 @@ libexec/motd.sh: libexec/motd.sh.in
 	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
 
 installdirs:
-	for dir in ${CONFRCDIR} ${CONFDIR} ${SCRIPTSDIR} ${MODULESDIR} ${LIBEXECDIR} ${DOCSDIR}
-		@echo "Make Directory: ${DESTDIR}${dir}"
-		${MKDIR} ${DESTDIR}${dir}
-	endfor
+	for dir in ${CONFRCDIR} ${CONFDIR} ${SCRIPTSDIR} ${MODULESDIR} ${LIBEXECDIR} ${DOCSDIR}; do \
+		@echo "Make Directory: ${DESTDIR}${dir}"; \
+		${MKDIR} ${DESTDIR}${dir}; \
+	done
 
 install: options installdirs rc.d/motd.sh libexec/motd.sh
 	${INSTALL_SCRIPT}       ${CONFRCD}  ${DESTDIR}${CONFRCDDIR}
