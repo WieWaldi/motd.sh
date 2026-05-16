@@ -69,7 +69,7 @@ options:
 	@echo "INSTALL_SCRIPT                               = ${INSTALL_SCRIPT}"
 	@echo "MKDIR                                        = ${MKDIR}"
 
-rc.d/motd.sh: rc.d/motd.sh.in
+etc/rc.d/motd.sh: etc/rc.d/motd.sh.in
 	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
 
 libexec/motd.sh: libexec/motd.sh.in
@@ -81,7 +81,7 @@ installdirs:
 		${MKDIR} ${DESTDIR}${dir}; \
 	done
 
-install: options installdirs rc.d/motd.sh libexec/motd.sh
+install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
 	${INSTALL_SCRIPT}       ${CONFRCD}  ${DESTDIR}${CONFRCDDIR}
 	${INSTALL_SCRIPT}       ${SCRIPTS}  ${DESTDIR}${SCRIPTSDIR}
 	${INSTALL_SCRIPT}       ${LIBEXEC}  ${DESTDIR}${LIBEXECDIR}
