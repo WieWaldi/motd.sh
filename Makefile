@@ -1,5 +1,47 @@
-# motd.sh
+# +----------------------------------------------------------------------------+
+# | ./motd.sh/Makefile                                                         |
+# +----------------------------------------------------------------------------+
+# |       Usage: ---                                                           |
+# | Description: Colorful motd written in bash. Server status at a glance.     |
+# |    Requires: ---                                                           |
+# |       Notes: ---                                                           |
+# |      Author: Waldemar Schroeer                                             |
+# |     Company: Rechenzentrum Amper                                           |
+# |     Version: 1.1                                                           |
+# |     Created: 2021-03-31                                                    |
+# |    Revision: 2026-05-13                                                    |
+# |                                                                            |
+# | Copyright © 2022 Waldemar Schroeer                                         |
+# |                  waldemar.schroeer(at)rz-amper.de                          |
+# +----------------------------------------------------------------------------+
+
 include config.mk
+NO_OBJ=
+CONFDIR=			${PREFIX}/etc
+BASEDIR=			${PREFIX}/share/motd.sh
+MODULESDIR=			${BASEDIR}/modules
+SHAREDIR=			${PREFIX}/share
+
+SCRIPTS=			bin/motd.sh
+SCRIPTSDIR=			${LIBEXECDIR}
+
+LIBEXEC=			libexec/motd.sh libexec/motd.sh.framework
+LIBEXECDIR=			${PREFIX}/libexec
+
+DOCS=				CONTRIBUTING.md README.md LICENSE LICENSE_BSD LICENSE_MIT
+DOCSDIR=			${SHAREDIR}/doc/motd.sh
+
+CONFETC=			etc/motd.sh.conf
+
+CONFRCD=			etc/rc.d/motd.sh
+CONFRCDDIR=			${CONFDIR}/rc.d
+
+CLEANFILES=			etc/rc.d/motd.sh libexec/motd.sh libexec/motd.sh.framework
+PREFIX_SUB=			-e 's,@@PREFIX@@,${PREFIX},g'
+
+INSTALL_DATA=		install -m 0644
+INSTALL_SCRIPT=		install -m 0555
+MKDIR=				mkdir -p
 
 .PHONY: all options install uninstall
 
@@ -7,38 +49,54 @@ all: options
 
 options:
 	@echo "This build options:"
-	@echo "PREFIX     = ${PREFIX}"
-	@echo "CONFDIR    = ${CONFDIR}"
-	@echo "BASEDIR    = ${BASEDIR}"
-	@echo "MODULES    = ${MODULES}"
+	@echo "PREFIX                                       = ${DESTDIR}${PREFIX}"
+	@echo "CONFDIR                                      = ${DESTDIR}${CONFDIR}"
+	@echo "BASEDIR                                      = ${DESTDIR}${BASEDIR}"
+	@echo "LIBEXECDIR                                   = ${DESTDIR}${LIBEXECDIR}"
+	@echo "MODULESDIR                                   = ${DESTDIR}${MODULESDIR}"
+	@echo "SHAREDIR                                     = ${DESTDIR}${SHAREDIR}"
+	@echo "SCRIPTSDIR                                   = ${DESTDIR}${SCRIPTSDIR}"
+	@echo "DOCSDIR                                      = ${DESTDIR}${DOCSDIR}"
+	@echo "CONFRCD                                      = ${DESTDIR}${CONFRCD}"
+	@echo "CONFRCDIR                                    = ${DESTDIR}${CONFRCDDIR}"
+	@echo "SCRIPTS                                      = ${SCRIPTS}"
+	@echo "CONFETC                                      = ${CONFETC}"
+	@echo "DOCS                                         = ${DOCS}"
+	@echo "CLEANFILES                                   = ${CLEANFILES}"
+	@echo "PREFIX_SUB                                   = ${PREFIX_SUB}"
+	@echo "INSTALL_DATA                                 = ${INSTALL_DATA}"
+	@echo "INSTALL_SCRIPT                               = ${INSTALL_SCRIPT}"
+	@echo "MKDIR                                        = ${MKDIR}"
 
-install:
-	@echo "Make Diretory: ${PREFIX}/bin"
-	@mkdir -p ${PREFIX}/bin
-	@echo "Make Diretory: ${CONFDIR}"
-	@mkdir -p ${CONFDIR}
-	@echo "Make Directory: ${BASEDIR}"
-	@mkdir -p ${BASEDIR}
-	@echo "Make Diretory: ${MODULES}"
-	@mkdir -p ${MODULES}
-	@echo "Installing executable file to ${PREFIX}/bin"
-	@cp -f motd.sh ${PREFIX}/bin
-	@chmod 755 ${PREFIX}/bin/motd.sh
-	@echo "Installing configuration file to ${CONFDIR}"
-	@cp -f motd.sh.conf ${CONFDIR}
-	@echo "Installing base files to ${BASEDIR}"
-	@cp -f motd.sh.framework ${BASEDIR}
-	@cp -f LICENSE ${BASEDIR}
-	@cp -f README.md ${BASEDIR}
-	@echo "Installing modules to ${MODULES}"
-	@cp -f modules/* ${MODULES}
+rc.d/motd.sh: rc.d/motd.sh.in
+	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
+
+libexec/motd.sh: libexec/motd.sh.in
+	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
+
+installdirs:
+	.for dir in ${CONFRCDIR} ${CONFDIR} ${SCRIPTSDIR} ${MODULESDIR} ${LIBEXECDIR} ${DOCSDIR}
+		@echo "Make Directory: ${DESTDIR}${dir}"
+		${MKDIR} ${DESTDIR}${dir}
+	.endfor
+
+install: options installdirs rc.d/motd.sh libexec/motd.sh
+	${INSTALL_SCRIPT}       ${CONFRCD}  ${DESTDIR}${CONFRCDDIR}
+	${INSTALL_SCRIPT}       ${SCRIPTS}  ${DESTDIR}${SCRIPTSDIR}
+	${INSTALL_SCRIPT}       ${LIBEXEC}  ${DESTDIR}${LIBEXECDIR}
+	${INSTALL_SCRIPT}       ${CONFETC}  ${DESTDIR}${CONFDIR}
+	${INSTALL_DATA}         ${DOCS}     ${DESTDIR}${DOCSDIR}
+	@cp -f modules/* ${MODULESDIR}
+	@chmod 755 ${MODULESDIR}/*
 
 uninstall:
 	@echo "Removing executable file from ${PREFIX}/bin"
-	@rm -f ${PREFIX}/bin/motd.sh
+	@rm -f {CONFRCD}
+	@rm -f {SCRIPTS}
+	@rm -f {LIBEXEC}
 	@echo "Removing configuration file from ${CONFDIR}"
 	@rm -f ${CONFDIR}/motd.sh.conf
-	@echo "Removing modules from ${MODULES}"
+	@echo "Removing modules from ${MODULESDIR}"
 	@rm -f ${MODULES}/*
 
 clean:
