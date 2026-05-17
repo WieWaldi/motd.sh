@@ -123,19 +123,5 @@ uninstall:
 	@echo "Removing ${DESTDIR}${BASEDIR}"
 	${UNINSTALL}			${DESTDIR}${BASEDIR}
 
-	@echo "Removing ${DESTDIR}${CONFRCDDIR}${CONFRCD}"
-	@rm -f ${DESTDIR}${CONFRCDDIR}${CONFRCD}
-	@echo "Removing ${DESTDIR}${CONFDIR}${CONFETC}
-	@rm -f ${DESTDIR}${SCRIPTSDIR}$/motd.sh
-
-	echo "Removing executable file from ${DESTDIR}${SCRIPTSDIR}"
-	@rm -f {SCRIPTS}
-	@echo "Removing library files from ${DESTDIR}${LIBEXECDIR}"
-	@rm -f {LIBEXEC}
-	@echo "Removing configuration file from ${CONFDIR}"
-	@rm -f ${CONFDIR}/motd.sh.conf
-	@echo "Removing modules from ${MODULESDIR}"
-	@rm -f ${MODULES}/*
-
 clean:
 	@echo "Nothing to do."
