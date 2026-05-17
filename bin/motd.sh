@@ -37,8 +37,7 @@ if [ -z ${1+x} ]; then                                                          
     for path in \
         "${HOME}/.local/etc/motd.sh/motd.sh.conf" \
         "${CONFDIR}/motd.sh.conf" \
-        "${BASEDIR}/motd.sh.conf" \
-        "${BASEDIR}/config.sh"; do
+        "${BASEDIR}/motd.sh.conf"; do
         if [ -f "${path}" ]; then
             CONFIG_PATH="${path}"
             break
@@ -59,9 +58,9 @@ fi
 if [ -z ${MOTD_FRAMEWORK+x} ]; then                                             # Find motd.sh.framework in the same way as the config file.
     MOTD_FRAMEWORK=""
     for path in \
-        "${HOME}/.local/share/motd.sh/motd.sh.framework" \
-        "${BASEDIR}/motd.sh.framework" \
-        "${BASEDIR}/framework.sh"; do
+        "${HOME}/.local/libexec/motd.sh.framework" \
+        "${PREFIX}/libexec/motd.sh.framework" \
+        "${BASEDIR}/motd.sh.framework"; do
         if [ -f "${path}" ]; then
             MOTD_FRAMEWORK="${path}"
             break
