@@ -37,20 +37,12 @@ CONFRCD=			etc/rc.d/motd.sh
 CONFRCDDIR=			${CONFDIR}/rc.d
 
 CLEANFILES=			etc/rc.d/motd.sh libexec/motd.sh libexec/motd.sh.framework
-PREFIX_SUB=			-e 's,@@PREFIX@@,${PREFIX},g'
+PREFIX_SUB=			-e 's|@@PREFIX@@|${DESTDIR}${PREFIX}|g'
 
 INSTALL_DATA=		install -m 0644
 INSTALL_SCRIPT=		install -m 0555
 UNINSTALL=			rm -rf
 MKDIR=				mkdir -p
-
-# for src in scripts/bin/*.in; do \
-# 		dst="$$(basename "$$src")"; \
-# 		sed \
-# 			-e 's|@@PREFIX@@|$(PREFIX)|g' \
-# 			"$$src" > "$(DESTDIR)$(BINDIR)/$$dst"; \
-# 		chmod 755 "$(DESTDIR)$(BINDIR)/$$dst"; \
-# 	done
 
 .PHONY: all options install uninstall
 
@@ -76,13 +68,8 @@ options:
 	@echo "PREFIX_SUB       = ${PREFIX_SUB}"
 	@echo "INSTALL_DATA     = ${INSTALL_DATA}"
 	@echo "INSTALL_SCRIPT   = ${INSTALL_SCRIPT}"
+	@echo "UNINSTALL        = ${UNINSTALL}"
 	@echo "MKDIR            = ${MKDIR}"
-
-etc/rc.d/motd.sh: etc/rc.d/motd.sh.in
-	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
-
-libexec/motd.sh: libexec/motd.sh.in
-	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
 
 installdirs:
 	for dir in ${CONFRCDDIR} ${CONFDIR} ${SCRIPTSDIR} ${MODULESDIR} ${LIBEXECDIR} ${DOCSDIR}; do \
@@ -90,13 +77,13 @@ installdirs:
 		${MKDIR} ${DESTDIR}$${dir}; \
 	done
 
-install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
+install: options installdirs
 	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDDIR}"
-	${INSTALL_SCRIPT}		${CONFRCD}		${DESTDIR}${CONFRCDDIR}
+	sed ${PREFIX_SUB} "${CONFRCD}" > "${DESTDIR}${CONFRCDDIR}"
 	@echo "Installing executable file to ${DESTDIR}${SCRIPTSDIR}"
 	${INSTALL_SCRIPT}		${SCRIPTS}		${DESTDIR}${SCRIPTSDIR}
 	@echo "Installing library files to ${DESTDIR}${LIBEXECDIR}"
-	${INSTALL_SCRIPT}		${LIBEXEC}		${DESTDIR}${LIBEXECDIR}
+	sed ${PREFIX_SUB} "${LIBEXEC}" > "${DESTDIR}${LIBEXECDIR}"
 	@echo "Installing configuration file to ${DESTDIR}${CONFDIR}"
 	${INSTALL_SCRIPT}		${CONFETC}		${DESTDIR}${CONFDIR}
 	@echo "Installing documentation files to ${DESTDIR}${DOCSDIR}"
@@ -106,7 +93,7 @@ install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
 	@echo "Setting permissions for executable files in ${MODULESDIR}"
 	chmod 755 ${DESTDIR}${MODULESDIR}/*
 
-uninstall:
+uninstall: clean
 	@echo "Removing rc.d config file from ${DESTDIR}${CONFRCDDIR}"
 	${UNINSTALL}			${DESTDIR}${CONFRCDDIR}/motd.sh
 	@echo "Removing executable file from ${DESTDIR}${SCRIPTSDIR}"
