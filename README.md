@@ -5,7 +5,7 @@
 [![MIT Licence](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/licence_mit.svg)](https://opensource.org/licenses/mit-license.php)
 ![Maintained](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/maintained_yes-green.svg)
 
-![MOTD screenshot](https://raw.githubusercontent.com/WieWaldi/motd.sh/master/img/screenshot_1.png)
+![motd.sh screenshot](https://raw.githubusercontent.com/WieWaldi/motd.sh/master/img/screenshot_1.png)
 
 ## Usage
 
@@ -38,16 +38,16 @@ you cloned `motd.sh` into your home directory):
 If you don't want to run it in all subshells you could do something like this
 instead:
 ```shell
-if [ -z "$MOTD" ]; then
+if [ -z "${motdsh}" ]; then
     ~/motd.sh/motd.sh
-    export MOTD=1
+    export motdsh=1
 fi
 ```
 
 If you use `tmux` and don't want to see the motd.sh everytime you open a new
 shell in `tmux`, add this to your `.tmux.conf`:
 ```
-set-option -ga update-environment ' MOTD'
+set-option -ga update-environment ' motdsh'
 ```
 
 ### Requirements
@@ -80,8 +80,51 @@ To add a new module you can create a new script in `modules` directory. For the
 output to be properly formatted it has to use `print_columns` function from
 `framework.sh`, please refer to the existing modules.
 
-Module files have to start with a two digit number followed by a hyphen. You may disable modules by simply rename the module file.
+Module files have to start with a two digit number followed by a hyphen.
+You may disable modules by simply rename the module file.
+```shell
+/usr/local
+├── bin
+│   └── motd.sh
+├── etc
+│   ├── motd.sh.conf
+│   └── rc.d
+│       └── motd.sh
+├── libexec
+│   ├── motd.sh
+│   └── motd.sh.framework
+└── share
+    ├── doc
+    │   └── motd.sh
+    │       ├── CONTRIBUTING.md
+    │       ├── LICENSE
+    │       ├── LICENSE_BSD
+    │       ├── LICENSE_MIT
+    │       └── README.md
+    └── motd.sh
+        └── modules
+            ├── 00-atest
+            ├── 00-banner
+            ├── 00-datetime
+            ├── 10-user
+            ├── 11-os
+            ├── 12-ip
+            ├── 13-public-ip
+            ├── 20-uptime
+            ├── 30-load
+            ├── 31-memory
+            ├── 32-disk
+            ├── 33-services
+            ├── 34-cert
+            ├── 34-docker
+            ├── 35-temperatures
+            ├── 36-smart
+            ├── 40-tmux
+            ├── 41-updates
+            ├── 50-quote
+            └── 60-weather
 
+```
 ## ToDo
 - [X] Add CONTRIBUTING.md file with contribution guidelines.  
 - [ ] Give option to disable colors (e.g. for better readability in `tmux`).  
@@ -90,9 +133,11 @@ Module files have to start with a two digit number followed by a hyphen. You may
 
 ## License
 Source code is licensed under the MIT License. See [LICENSE][1] for more details.  
+Some parts of the code have been published under the BSD-2-Clause License,
+see the respective files for details.
 
 ## Credits
-MOTD is hugely inspired by these repos  
+motd.sh is hugely inspired by these repos  
    [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin.  
    [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran.  
    [dynamic_motd](https://github.com/sstallion/dynamic_motd) - Dynamic MOTD for FreeBSD by Steve Stallion.  
