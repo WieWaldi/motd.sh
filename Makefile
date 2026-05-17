@@ -81,7 +81,7 @@ install: options installdirs
 	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDDIR}"
 	sed ${PREFIX_SUB} etc/rc.d/motd.sh > "${DESTDIR}${CONFRCDDIR}/motd.sh"
 	@echo "Installing executable file to ${DESTDIR}${SCRIPTSDIR}"
-	${INSTALL_SCRIPT}		${SCRIPTS}		${DESTDIR}${SCRIPTSDIR}
+	sed ${PREFIX_SUB} bin/motd.sh > "${DESTDIR}${SCRIPTSDIR}/motd.sh"
 	@echo "Installing library files to ${DESTDIR}${LIBEXECDIR}"
 	sed ${PREFIX_SUB} libexec/motd.sh > "${DESTDIR}${LIBEXECDIR}/motd.sh"
 	sed ${PREFIX_SUB} libexec/motd.sh.framework > "${DESTDIR}${LIBEXECDIR}/motd.sh.framework"
