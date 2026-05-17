@@ -93,9 +93,9 @@ install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
 	@echo "Installing documentation files to ${DESTDIR}${DOCSDIR}"
 	${INSTALL_DATA}         ${DOCS}     ${DESTDIR}${DOCSDIR}
 	@echo "Installing modules to ${DESTDIR}${MODULESDIR}"
-	@cp -f modules/* ${MODULESDIR}
+	cp -f modules/* ${DESTDIR}${MODULESDIR}
 	@echo "Setting permissions for executable files in ${MODULESDIR}"
-	@chmod 755 ${MODULESDIR}/*
+	chmod 755 ${DESTDIR}${MODULESDIR}/*
 
 uninstall:
 	@echo "Removing executable file from ${PREFIX}/bin"
