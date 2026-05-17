@@ -41,7 +41,16 @@ PREFIX_SUB=			-e 's,@@PREFIX@@,${PREFIX},g'
 
 INSTALL_DATA=		install -m 0644
 INSTALL_SCRIPT=		install -m 0555
+UNINSTALL=			rm -f
 MKDIR=				mkdir -p
+
+define install_template
+		dst="$$(basename "$$src")"; \
+		sed \
+		-e 's|@@PREFIX@@|${PREFIX}|g' \
+		"$$src" > "$(1)/$$dst"; \
+	chmod 755 "$(1)/$$dst"
+endef
 
 .PHONY: all options install uninstall
 
@@ -49,25 +58,25 @@ all: options
 
 options:
 	@echo "This build options:"
-	@echo "PREFIX                                       = ${DESTDIR}${PREFIX}"
-	@echo "BASEDIR                                      = ${DESTDIR}${BASEDIR}"
-	@echo "SHAREDIR                                     = ${DESTDIR}${SHAREDIR}"
-	@echo "MODULESDIR                                   = ${DESTDIR}${MODULESDIR}"
-	@echo "CONFETC                                      = ${CONFETC}"
-	@echo "CONFDIR                                      = ${DESTDIR}${CONFDIR}"
-	@echo "LIBEXEC                                      = ${LIBEXEC}"
-	@echo "LIBEXECDIR                                   = ${DESTDIR}${LIBEXECDIR}"
-	@echo "SCRIPTS                                      = ${SCRIPTS}"
-	@echo "SCRIPTSDIR                                   = ${DESTDIR}${SCRIPTSDIR}"
-	@echo "DOCS                                         = ${DOCS}"
-	@echo "DOCSDIR                                      = ${DESTDIR}${DOCSDIR}"
-	@echo "CONFRCD                                      = ${CONFRCD}"
-	@echo "CONFRCDIR                                    = ${DESTDIR}${CONFRCDDIR}"
-	@echo "CLEANFILES                                   = ${CLEANFILES}"
-	@echo "PREFIX_SUB                                   = ${PREFIX_SUB}"
-	@echo "INSTALL_DATA                                 = ${INSTALL_DATA}"
-	@echo "INSTALL_SCRIPT                               = ${INSTALL_SCRIPT}"
-	@echo "MKDIR                                        = ${MKDIR}"
+	@echo "PREFIX           = ${DESTDIR}${PREFIX}"
+	@echo "BASEDIR          = ${DESTDIR}${BASEDIR}"
+	@echo "SHAREDIR         = ${DESTDIR}${SHAREDIR}"
+	@echo "MODULESDIR       = ${DESTDIR}${MODULESDIR}"
+	@echo "CONFETC          = ${CONFETC}"
+	@echo "CONFDIR          = ${DESTDIR}${CONFDIR}"
+	@echo "LIBEXEC          = ${LIBEXEC}"
+	@echo "LIBEXECDIR       = ${DESTDIR}${LIBEXECDIR}"
+	@echo "SCRIPTS          = ${SCRIPTS}"
+	@echo "SCRIPTSDIR       = ${DESTDIR}${SCRIPTSDIR}"
+	@echo "DOCS             = ${DOCS}"
+	@echo "DOCSDIR          = ${DESTDIR}${DOCSDIR}"
+	@echo "CONFRCD          = ${CONFRCD}"
+	@echo "CONFRCDIR        = ${DESTDIR}${CONFRCDDIR}"
+	@echo "CLEANFILES       = ${CLEANFILES}"
+	@echo "PREFIX_SUB       = ${PREFIX_SUB}"
+	@echo "INSTALL_DATA     = ${INSTALL_DATA}"
+	@echo "INSTALL_SCRIPT   = ${INSTALL_SCRIPT}"
+	@echo "MKDIR            = ${MKDIR}"
 
 etc/rc.d/motd.sh: etc/rc.d/motd.sh.in
 	sed ${PREFIX_SUB} ${.ALLSRC} >${.TARGET}
@@ -83,24 +92,44 @@ installdirs:
 
 install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
 	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDDIR}"
-	${INSTALL_SCRIPT}       ${CONFRCD}  ${DESTDIR}${CONFRCDDIR}
+	${INSTALL_SCRIPT}		${CONFRCD}		${DESTDIR}${CONFRCDDIR}
 	@echo "Installing executable file to ${DESTDIR}${SCRIPTSDIR}"
-	${INSTALL_SCRIPT}       ${SCRIPTS}  ${DESTDIR}${SCRIPTSDIR}
+	${INSTALL_SCRIPT}		${SCRIPTS}		${DESTDIR}${SCRIPTSDIR}
 	@echo "Installing library files to ${DESTDIR}${LIBEXECDIR}"
-	${INSTALL_SCRIPT}       ${LIBEXEC}  ${DESTDIR}${LIBEXECDIR}
+	${INSTALL_SCRIPT}		${LIBEXEC}		${DESTDIR}${LIBEXECDIR}
 	@echo "Installing configuration file to ${DESTDIR}${CONFDIR}"
-	${INSTALL_SCRIPT}       ${CONFETC}  ${DESTDIR}${CONFDIR}
+	${INSTALL_SCRIPT}		${CONFETC}		${DESTDIR}${CONFDIR}
 	@echo "Installing documentation files to ${DESTDIR}${DOCSDIR}"
-	${INSTALL_DATA}         ${DOCS}     ${DESTDIR}${DOCSDIR}
+	${INSTALL_DATA}		${DOCS}				${DESTDIR}${DOCSDIR}
 	@echo "Installing modules to ${DESTDIR}${MODULESDIR}"
 	cp -f modules/* ${DESTDIR}${MODULESDIR}
 	@echo "Setting permissions for executable files in ${MODULESDIR}"
 	chmod 755 ${DESTDIR}${MODULESDIR}/*
 
 uninstall:
-	@echo "Removing executable file from ${PREFIX}/bin"
-	@rm -f {CONFRCD}
+	@echo "Removing rc.d config file from ${DESTDIR}${CONFRCDDIR}"
+	${UNINSTALL}			${DESTDIR}${CONFRCDDIR}${CONFRCD}  
+	@echo "Removing executable file from ${DESTDIR}${SCRIPTSDIR}"
+	${UNINSTALL}			${DESTDIR}${SCRIPTSDIR}${SCRIPTS}  
+	@echo "Removing library files from ${DESTDIR}${LIBEXECDIR}"
+	${UNINSTALL}			${DESTDIR}${LIBEXECDIR}${LIBEXEC}  
+	@echo "Removing configuration file from ${DESTDIR}${CONFDIR}"
+	${UNINSTALL}			${DESTDIR}${CONFDIR}${CONFETC}  
+	@echo "Removing documentation files from ${DESTDIR}${DOCSDIR}"
+	${UNINSTALL}			${DESTDIR}${DOCSDIR}${DOCS}     
+	@echo "Removing modules from ${DESTDIR}${MODULESDIR}"
+	${UNINSTALL}			${DESTDIR}${MODULESDIR}
+	@echo "Removing ${DESTDIR}${BASEDIR}"
+	${UNINSTALL}			${DESTDIR}${BASEDIR}
+
+	@echo "Removing ${DESTDIR}${CONFRCDDIR}${CONFRCD}"
+	@rm -f ${DESTDIR}${CONFRCDDIR}${CONFRCD}
+	@echo "Removing ${DESTDIR}${CONFDIR}${CONFETC}
+	@rm -f ${DESTDIR}${SCRIPTSDIR}$/motd.sh
+
+	echo "Removing executable file from ${DESTDIR}${SCRIPTSDIR}"
 	@rm -f {SCRIPTS}
+	@echo "Removing library files from ${DESTDIR}${LIBEXECDIR}"
 	@rm -f {LIBEXEC}
 	@echo "Removing configuration file from ${CONFDIR}"
 	@rm -f ${CONFDIR}/motd.sh.conf
