@@ -41,7 +41,7 @@ PREFIX_SUB=			-e 's,@@PREFIX@@,${PREFIX},g'
 
 INSTALL_DATA=		install -m 0644
 INSTALL_SCRIPT=		install -m 0555
-UNINSTALL=			rm -f
+UNINSTALL=			rm -rf
 MKDIR=				mkdir -p
 
 # for src in scripts/bin/*.in; do \
@@ -108,15 +108,16 @@ install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
 
 uninstall:
 	@echo "Removing rc.d config file from ${DESTDIR}${CONFRCDDIR}"
-	${UNINSTALL}			${DESTDIR}${CONFRCDDIR}${CONFRCD}  
+	${UNINSTALL}			${DESTDIR}${CONFRCDDIR}/motd.sh
 	@echo "Removing executable file from ${DESTDIR}${SCRIPTSDIR}"
-	${UNINSTALL}			${DESTDIR}${SCRIPTSDIR}${SCRIPTS}  
+	${UNINSTALL}			${DESTDIR}${SCRIPTSDIR}/motd.sh
 	@echo "Removing library files from ${DESTDIR}${LIBEXECDIR}"
-	${UNINSTALL}			${DESTDIR}${LIBEXECDIR}${LIBEXEC}  
+	${UNINSTALL}			${DESTDIR}${LIBEXECDIR}/motd.sh.framework
+	${UNINSTALL}			${DESTDIR}${LIBEXECDIR}/motd.sh
 	@echo "Removing configuration file from ${DESTDIR}${CONFDIR}"
-	${UNINSTALL}			${DESTDIR}${CONFDIR}${CONFETC}  
+	${UNINSTALL}			${DESTDIR}${CONFDIR}/motd.sh.conf
 	@echo "Removing documentation files from ${DESTDIR}${DOCSDIR}"
-	${UNINSTALL}			${DESTDIR}${DOCSDIR}${DOCS}     
+	${UNINSTALL}			${DESTDIR}${DOCSDIR}
 	@echo "Removing modules from ${DESTDIR}${MODULESDIR}"
 	${UNINSTALL}			${DESTDIR}${MODULESDIR}
 	@echo "Removing ${DESTDIR}${BASEDIR}"
