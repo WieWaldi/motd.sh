@@ -79,11 +79,12 @@ installdirs:
 
 install: options installdirs
 	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDDIR}"
-	sed ${PREFIX_SUB} "${CONFRCD}" > "${DESTDIR}${CONFRCDDIR}"
+	sed ${PREFIX_SUB} etc/rc.d/motd.sh > "${DESTDIR}${CONFRCDDIR}/motd.sh"
 	@echo "Installing executable file to ${DESTDIR}${SCRIPTSDIR}"
 	${INSTALL_SCRIPT}		${SCRIPTS}		${DESTDIR}${SCRIPTSDIR}
 	@echo "Installing library files to ${DESTDIR}${LIBEXECDIR}"
-	sed ${PREFIX_SUB} "${LIBEXEC}" > "${DESTDIR}${LIBEXECDIR}"
+	sed ${PREFIX_SUB} libexec/motd.sh > "${DESTDIR}${LIBEXECDIR}/motd.sh"
+	sed ${PREFIX_SUB} libexec/motd.sh.framework > "${DESTDIR}${LIBEXECDIR}/motd.sh.framework"
 	@echo "Installing configuration file to ${DESTDIR}${CONFDIR}"
 	${INSTALL_SCRIPT}		${CONFETC}		${DESTDIR}${CONFDIR}
 	@echo "Installing documentation files to ${DESTDIR}${DOCSDIR}"
