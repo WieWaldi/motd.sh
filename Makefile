@@ -77,8 +77,8 @@ libexec/motd.sh: libexec/motd.sh.in
 
 installdirs:
 	for dir in ${CONFRCDIR} ${CONFDIR} ${SCRIPTSDIR} ${MODULESDIR} ${LIBEXECDIR} ${DOCSDIR}; do \
-		echo "Make Directory: ${DESTDIR}${dir}"; \
-		${MKDIR} ${DESTDIR}${dir}; \
+		echo "Make Directory: ${DESTDIR}$${dir}"; \
+		${MKDIR} ${DESTDIR}$${dir}; \
 	done
 
 install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
