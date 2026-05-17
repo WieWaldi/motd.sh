@@ -23,7 +23,7 @@ MODULESDIR=			${BASEDIR}/modules
 SHAREDIR=			${PREFIX}/share
 
 SCRIPTS=			bin/motd.sh
-SCRIPTSDIR=			${LIBEXECDIR}
+SCRIPTSDIR=			${PREFIX}/bin
 
 LIBEXEC=			libexec/motd.sh libexec/motd.sh.framework
 LIBEXECDIR=			${PREFIX}/libexec
