@@ -27,7 +27,7 @@
 name="motd.sh"
 desc="Colorful motd written in bash. Server status at a glance."
 rcvar="update_motdsh"
-config_files="${@@PREFIX@@}/etc/motd.sh.conf"
+config_files="@@PREFIX@@/etc/motd.sh.conf"
 required_files="${config_files}"
 command="@@PREFIX@@/libexec/${name}"
 command_interpreter="/bin/sh"
