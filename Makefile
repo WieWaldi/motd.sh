@@ -44,13 +44,13 @@ INSTALL_SCRIPT=		install -m 0555
 UNINSTALL=			rm -f
 MKDIR=				mkdir -p
 
-define install_template
-		dst="$$(basename "$$src")"; \
-		sed \
-		-e 's|@@PREFIX@@|${PREFIX}|g' \
-		"$$src" > "$(1)/$$dst"; \
-	chmod 755 "$(1)/$$dst"
-endef
+# for src in scripts/bin/*.in; do \
+# 		dst="$$(basename "$$src")"; \
+# 		sed \
+# 			-e 's|@@PREFIX@@|$(PREFIX)|g' \
+# 			"$$src" > "$(DESTDIR)$(BINDIR)/$$dst"; \
+# 		chmod 755 "$(DESTDIR)$(BINDIR)/$$dst"; \
+# 	done
 
 .PHONY: all options install uninstall
 
