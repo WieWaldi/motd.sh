@@ -82,12 +82,19 @@ installdirs:
 	done
 
 install: options installdirs etc/rc.d/motd.sh libexec/motd.sh
+	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDIR}"
 	${INSTALL_SCRIPT}       ${CONFRCD}  ${DESTDIR}${CONFRCDDIR}
+	@echo "Installing executable file to ${DESTDIR}${SCRIPTSDIR}"
 	${INSTALL_SCRIPT}       ${SCRIPTS}  ${DESTDIR}${SCRIPTSDIR}
+	@echo "Installing library files to ${DESTDIR}${LIBEXECDIR}"
 	${INSTALL_SCRIPT}       ${LIBEXEC}  ${DESTDIR}${LIBEXECDIR}
+	@echo "Installing configuration file to ${DESTDIR}${CONFDIR}"
 	${INSTALL_SCRIPT}       ${CONFETC}  ${DESTDIR}${CONFDIR}
+	@echo "Installing documentation files to ${DESTDIR}${DOCSDIR}"
 	${INSTALL_DATA}         ${DOCS}     ${DESTDIR}${DOCSDIR}
+	@echo "Installing modules to ${DESTDIR}${MODULESDIR}"
 	@cp -f modules/* ${MODULESDIR}
+	@echo "Setting permissions for executable files in ${MODULESDIR}"
 	@chmod 755 ${MODULESDIR}/*
 
 uninstall:
