@@ -18,7 +18,7 @@
 # +----------------------------------------------------------------------------+
 
 set -euo pipefail
-source "${BASEDIR}/motd.sh.framework"
+source "${PREFIX}/libexec/motd.sh.framework"
 
 # Check if module is enabled
 [[ -z "${MOD_DATETIME_RUN+x}" ]] && exit 0

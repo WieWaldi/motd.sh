@@ -24,7 +24,7 @@
 #   wiewaldi ALL=(root) NOPASSWD: /usr/local/sbin/smartctl
 
 set -euo pipefail
-source "${BASEDIR}/motd.sh.framework"
+source "${PREFIX}/libexec/motd.sh.framework"
 
 # Check if module is enabled
 [[ -z "${MOD_SMART_RUN+x}" ]] && exit 0
