@@ -1,11 +1,30 @@
-<img src="https://raw.githubusercontent.com/WieWaldi/badges/master/img/RZ-Amper_Logo_135x135.png" align="left" width="135px" height="135px" />
-
-### motd.sh by WieWaldi
+### motd.sh
 *Colorful MOTD (message of the day) written in bash. Server status at a glance.*  
 [![MIT Licence](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/licence_mit.svg)](https://opensource.org/licenses/mit-license.php)
 ![Maintained](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/maintained_yes-green.svg)
 
 ![motd.sh screenshot](https://raw.githubusercontent.com/WieWaldi/motd.sh/master/img/screenshot_1.png)
+
+## Installation
+Preferred method to get started is by [forking][6] this repository on GitHub
+and clone it. You may download on of the [releases][4] as well.
+
+```shell
+$ git clone git@github.com:WieWaldi/motd.sh.git
+$ sudo motd.sh/setup.sh
+```
+The setup script will put motd.sh into it's default location. Don't
+worry, you'll be fine. The default location is /usr/local.
+If you don't like that you may run motd.sh right out of this directory or 
+tinker around and place it where you like it
+
+If you're using make, you'll have two options to define the installation
+destination. You can either set the `PREFIX` variable in `config.mk` or
+pass it as an argument to `make` command:
+```shell
+# export DESTDIR=`mktemp -d`
+# make install
+```
 
 ## Usage
 
@@ -53,13 +72,13 @@ set-option -ga update-environment ' motdsh'
 ### Requirements
 In order to run all the available modules the following programs are required:
 
-* [`coreutils`][6] - for basic commands like `date`, `uptime`, `df`, etc.
-* [`figlet`][2] - for the banner module
-* [`curl`][3] - for the public IP module
-* [`bc`][4] - for the uptime module
+* [`coreutils`][14] - for basic commands like `date`, `uptime`, `df`, etc.
+* [`figlet`][10] - for the banner module
+* [`curl`][11] - for the public IP module
+* [`bc`][12] - for the uptime module
 * [`fortune`][5] - for the quote module
 
-This list excludes the obvious ones, like [`tmux`](https://github.com/tmux/tmux)
+This list excludes the obvious ones, like [`tmux`][15]
 for `tmux` module. If any program requried by the given module is missing 
 (or any other error occurs), it will fail silently, i.e. the module just won't
 be shown at all.
@@ -133,24 +152,31 @@ You may disable modules by simply rename the module file.
 - [ ] Add more modules (e.g. weather, news, etc.)  
 
 ## License
-Source code is licensed under the MIT License. See [LICENSE][1] for more details.  
+Source code is licensed under the MIT License. See [LICENSE][1] for more details.
 Some parts of the code have been published under the BSD-2-Clause License,
 see the respective files for details.
 
 ## Credits
 motd.sh is hugely inspired by these repos  
-   [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin.  
-   [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran.  
-   [dynamic_motd](https://github.com/sstallion/dynamic_motd) - Dynamic MOTD for FreeBSD by Steve Stallion.  
+   [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin - Fun MOTD (message of the day) for your homelab server  
+   [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran - Fancy, colorful MOTD written in bash. Server status at a glance.  
+   [dynamic_motd](https://github.com/sstallion/dynamic_motd) by Steve Stallion - Dynamic messages of the day on FreeBSD 13.0 or later  
 
 ## Links
 Some sites and projects related to FreeBSD's motd:  
    [BSD Magazine](https://bsdmag.org/) - BSD related news, articles and tutorials.  
    [freebsd-dynamic-motd](https://github.com/rooty0/freebsd-dynamic-motd/blob/master/motd.sh) - Another dynamic MOTD script for FreeBSD.  
 
-[1]: https://github.com/WieWaldi/motd.sh/blob/master/LICENSE
-[2]: http://www.figlet.org/
-[3]: https://curl.se/
-[4]: https://www.gnu.org/software/bc/
-[5]: https://software.clapper.org/fortune/
-[6]: https://www.gnu.org/software/coreutils/
+[1]: https://github.com/WieWaldi/motd.sh
+[2]: https://github.com/WieWaldi/motd.sh/wiki
+[3]: https://github.com/WieWaldi/motd.sh/issues
+[4]: https://github.com/WieWaldi/motd.sh/releases
+[5]: https://github.com/WieWaldi/motd.sh/blob/master/LICENSE
+[6]: https://docs.github.com/en/github/getting-started-with-github/fork-a-repo
+[7]: https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
+[10]: http://www.figlet.org/
+[11]: https://curl.se/
+[12]: https://www.gnu.org/software/bc/
+[13]: https://software.clapper.org/fortune/
+[14]: https://www.gnu.org/software/coreutils/
+[15]: https://github.com/tmux/tmux
