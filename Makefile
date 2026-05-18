@@ -49,6 +49,7 @@ MKDIR=				mkdir -p
 all: options
 
 options:
+	@cat setup-notice.txt
 	@echo "This build options:"
 	@echo "PREFIX           = ${DESTDIR}${PREFIX}"
 	@echo "BASEDIR          = ${DESTDIR}${BASEDIR}"
@@ -77,7 +78,7 @@ installdirs:
 		${MKDIR} ${DESTDIR}$${dir}; \
 	done
 
-install: options installdirs
+install: installdirs
 	@echo "Installing rc.d config file to ${DESTDIR}${CONFRCDDIR}"
 	sed ${PREFIX_SUB} etc/rc.d/motd.sh > "${DESTDIR}${CONFRCDDIR}/motd.sh"
 	chmod 755 "${DESTDIR}${CONFRCDDIR}/motd.sh"

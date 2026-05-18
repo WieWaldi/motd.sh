@@ -7,20 +7,21 @@
 
 ## Installation
 Preferred method to get started is by [forking][6] this repository on GitHub
-and clone it. You may download on of the [releases][4] as well.
+and clone it. You may download one of the [releases][4] as well.
 
 ```shell
 $ git clone git@github.com:WieWaldi/motd.sh.git
 $ sudo motd.sh/setup.sh
 ```
 The setup script will put motd.sh into it's default location. Don't
-worry, you'll be fine. The default location is /usr/local.
+worry, you'll be fine. The default location is `/usr/local`.
 If you don't like that you may run motd.sh right out of this directory or 
 tinker around and place it where you like it
 
 If you're using make, you'll have two options to define the installation
 destination. You can either set the `PREFIX` variable in `config.mk` or
-pass it as an argument to `make` command:
+pass it to `make` command. Just `make` will print all variables used 
+in the Makefile.
 ```shell
 # export DESTDIR=`mktemp -d`
 # make install
@@ -29,22 +30,16 @@ pass it as an argument to `make` command:
 ## Usage
 
 ### Running
-Clone the repository:
+Simply by running it.
 ```shell
-git clone https://github.com/WieWaldi/motd.sh.git
+$ motd.sh
 ```
-
-Then run `motd.sh`:
-```shell
-./motd.sh/motd.sh
-```
-
 This runs all the scripts in `modules` directory in order, `run-parts` style,
 and formats the output. If any modules are missing in your output, plese see 
-[requirements](#requirements). You can also pass the config file path as the
-script argument (see [configuration](#configuration)):
+[requirements](#Requirements). You can also pass the config file path as the
+script argument (see [configuration](#Configuration)):
 ```shell
-./motd.sh/motd.sh ./path/to/config.sh
+$ /usr/local/bin/motd.sh /usr/local/etc/motd.sh
 ```
 
 ### Running at login
@@ -76,7 +71,7 @@ In order to run all the available modules the following programs are required:
 * [`figlet`][10] - for the banner module
 * [`curl`][11] - for the public IP module
 * [`bc`][12] - for the uptime module
-* [`fortune`][5] - for the quote module
+* [`fortune`][13] - for the quote module
 
 This list excludes the obvious ones, like [`tmux`][15]
 for `tmux` module. If any program requried by the given module is missing 
