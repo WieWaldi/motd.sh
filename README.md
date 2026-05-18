@@ -53,6 +53,7 @@ set-option -ga update-environment ' motdsh'
 ### Requirements
 In order to run all the available modules the following programs are required:
 
+* [`coreutils`][6] - for basic commands like `date`, `uptime`, `df`, etc.
 * [`figlet`][2] - for the banner module
 * [`curl`][3] - for the public IP module
 * [`bc`][4] - for the uptime module
@@ -152,3 +153,4 @@ Some sites and projects related to FreeBSD's motd:
 [3]: https://curl.se/
 [4]: https://www.gnu.org/software/bc/
 [5]: https://software.clapper.org/fortune/
+[6]: https://www.gnu.org/software/coreutils/
