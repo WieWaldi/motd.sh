@@ -35,7 +35,8 @@ export BASE_DIR
 if [ -z ${1+x} ]; then                                                          # If no config file is provided, look for one in the following order:
     CONFIG_PATH=""
     for path in \
-        "${HOME}/.local/etc/motd.sh/motd.sh.conf" \
+        "${HOME}/.local/share/motd.sh/motd.sh.conf" \
+        "${HOME}/.config/motd.sh/motd.sh.conf" \
         "${CONFDIR}/motd.sh.conf" \
         "${BASEDIR}/motd.sh.conf"; do
         if [ -f "${path}" ]; then
@@ -79,6 +80,7 @@ case ${os} in                                                                   
     Linux*)
     export awk="awk"
     export bc="bc"
+    export date="date"
     export grep="/usr/bin/grep"
     export sed="sed"
     export sort="/usr/bin/sort"
@@ -87,6 +89,7 @@ case ${os} in                                                                   
     FreeBSD)
     export awk="awk"
     export bc="bc"
+    export date="gdate"
     export grep="/usr/bin/grep"
     export sed="sed"
     export sort="/usr/bin/sort"
@@ -95,6 +98,7 @@ case ${os} in                                                                   
     SunOS)
     export awk="gawk"
     export bc="gbc"
+    export date="date"
     export grep="/usr/bin/grep"
     export sed="gsed"
     export sort="/usr/bin/sort"
