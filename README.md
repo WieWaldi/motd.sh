@@ -19,7 +19,7 @@ If you don't like that you may run motd.sh right out of this directory or
 tinker around and place it where you like it
 
 If you're using make, you'll have two options to define the installation
-destination. You can either set the `PREFIX` variable in `config.mk` or
+target. You can either set the `PREFIX` variable in `config.mk` or
 pass it to `make` command. Just `make` will print all variables used 
 in the Makefile.
 ```shell
