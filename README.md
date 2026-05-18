@@ -1,4 +1,4 @@
-### motd.sh
+# motd.sh
 *Colorful MOTD (message of the day) written in bash. Server status at a glance.*  
 [![MIT Licence](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/licence_mit.svg)](https://opensource.org/licenses/mit-license.php)
 ![Maintained](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/maintained_yes-green.svg)
