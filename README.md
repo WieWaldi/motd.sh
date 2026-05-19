@@ -30,7 +30,7 @@ Preferred method to get started is by [forking][6] this repository on GitHub
 and clone it. You may download one of the [releases][4] as well.
 
 ```shell
-$ git clone git@github.com:WieWaldi/motd.sh.git
+$ git clone https://github.com/WieWaldi/motd.sh.git
 $ sudo motd.sh/setup.sh
 ```
 The setup script `setup.sh` will put motd.sh into it's default location. Don't
