@@ -1,6 +1,4 @@
-<img src="https://raw.githubusercontent.com/WieWaldi/badges/master/img/RZ-Amper_Logo_135x135.png" align="left" width="135px" height="135px" />
-
-### motd.sh by WieWaldi
+# motd.sh
 *Colorful MOTD (message of the day) written in bash. Server status at a glance.*  
 [![MIT Licence](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/licence_mit.svg)](https://opensource.org/licenses/mit-license.php)
 ![Maintained](https://raw.githubusercontent.com/WieWaldi/badges/master/badges/maintained_yes-green.svg)
