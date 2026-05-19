@@ -127,7 +127,8 @@ the config file `motd.sh.conf` in the following order:
 Alternatively you can copy the default configuration to a place of your choice
 and pass the path to the config file as an argument to motd.sh:
 ```shell
-$ mkdir -p ~/.local/share/motd.sh && cp /usr/local/etc/motd.sh.conf ~/.local/share/motd.sh
+$ mkdir -p ~/.local/share/motd.sh
+$ cp /usr/local/etc/motd.sh.conf ~/.local/share/motd.sh
 $ /usr/local/bin/motd.sh ~/.local/share/motd.sh/motd.sh.conf
 ```
 
