@@ -33,12 +33,12 @@ and clone it. You may download one of the [releases][4] as well.
 $ git clone git@github.com:WieWaldi/motd.sh.git
 $ sudo motd.sh/setup.sh
 ```
-The setup script will put motd.sh into it's default location. Don't
+The setup script `setup.sh` will put motd.sh into it's default location. Don't
 worry, you'll be fine. The default location is `/usr/local`.
 If you don't like that you may run motd.sh right out of this directory or 
 tinker around and place it where you like it
 
-If you're using make, you'll have two options to define the installation
+If you're using `make`, you'll have two options to define the installation
 target. You can either set the `PREFIX` variable in `config.mk` or
 pass it to `make` command as an environment variable. Just `make` will print
 all variables used and some additional info.
