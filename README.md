@@ -157,10 +157,11 @@ Some parts of the code have been published under the BSD-2-Clause License,
 see the respective files for details.
 
 ## Credits & Links
-motd.sh is hugely inspired by these repos  
+motd.sh is hugely inspired by these repos
  - [MOTD](https://github.com/HermannBjorgvin/MOTD) by Hermann Björgvin - Fun MOTD (message of the day) for your homelab server  
  - [Fancy MOTD](https://github.com/bcyran/fancy-motd) by Bazyli Cyran - Fancy, colorful MOTD written in bash. Server status at a glance.  
  - [dynamic_motd](https://github.com/sstallion/dynamic_motd) by Steve Stallion - Dynamic messages of the day on FreeBSD 13.0 or later  
+
 Some sites and projects related to FreeBSD's motd:  
  - [BSD Magazine](https://bsdmag.org/) - BSD related news, articles and tutorials.  
  - [freebsd-dynamic-motd](https://github.com/rooty0/freebsd-dynamic-motd/blob/master/motd.sh) - Another dynamic MOTD script for FreeBSD.  
