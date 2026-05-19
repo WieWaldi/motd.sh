@@ -31,6 +31,7 @@ and clone it. You may download one of the [releases][4] as well.
 
 ```shell
 $ git clone https://github.com/WieWaldi/motd.sh.git
+$ cd motd.sh
 $ sudo motd.sh/setup.sh
 ```
 The setup script `setup.sh` will put motd.sh into it's default location. Don't
@@ -54,6 +55,7 @@ In order to run all the available modules the following programs are required:
 * [`curl`][11] - for the public IP module
 * [`bc`][12] - for the uptime module
 * [`fortune`][13] - for the quote module
+* [`smartctl`][16] - for the S.M.A.R.T module
 
 This list excludes the obvious ones, like [`tmux`][15]
 for `tmux` module. If any program requried by the given module is missing 
@@ -73,7 +75,8 @@ and formats the output. If any modules are missing in your output, plese see
 [requirements](#Requirements). You can also pass the config file path as the
 script argument (see [configuration](#Configuration)):
 ```shell
-$ mkdir -p ~/.local/share/motd.sh && cp /usr/local/etc/motd.sh.conf ~/.local/share/motd.sh
+$ mkdir -p ~/.local/share/motd.sh 
+$ cp /usr/local/etc/motd.sh.conf ~/.local/share/motd.sh
 $ /usr/local/bin/motd.sh ~/.local/share/motd.sh/motd.sh.conf
 ```
 
@@ -176,4 +179,5 @@ Some sites and projects related to FreeBSD's motd:
 [13]: https://software.clapper.org/fortune/
 [14]: https://www.gnu.org/software/coreutils/
 [15]: https://github.com/tmux/tmux
+[16]: https://www.smartmontools.org/
 [20]: https://man.freebsd.org/cgi/man.cgi?query=motd&manpath=FreeBSD+13.0-RELEASE+and+Ports
